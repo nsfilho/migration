@@ -1,0 +1,206 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>redis-locker</title>
+	<meta name="description" content="Documentation for redis-locker">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">redis-locker</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>redis-locker</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#migration-library" id="migration-library" style="color: inherit; text-decoration: none;">
+					<h1>Migration Library</h1>
+				</a>
+				<p>A very simple and small library to speed up the migration process to your MongoDB and
+				others routines. A fully updated microservice version.</p>
+				<ul>
+					<li>Project licensed under: GPLv3</li>
+					<li>Site Documentation: <a href="https://nsfilho.github.io/migration/index.html">Homepage</a></li>
+					<li>Repository: <a href="https://github.com/nsfilho/migration.git">GitHub</a></li>
+				</ul>
+				<a href="#environment-variables" id="environment-variables" style="color: inherit; text-decoration: none;">
+					<h2>Environment Variables</h2>
+				</a>
+				<p>This services use some environment variables to pre-adjust some things, like:</p>
+				<ul>
+					<li><code>MONGO_URL</code>: A URI for connect to a mongo database. Default: <code>mongodb://root:password@127.0.0.1/platform?authSource=admin</code></li>
+					<li><code>MONGO_DATABASE</code>: a database name (usually, same as in <code>MONGO_URL</code>). Default: platform.</li>
+					<li><code>MIGRATION_COLLECTION_NAME</code>: the collection name to maintain documents about stages and results. Default: migration.</li>
+					<li><code>MIGRATION_DEBUG_CONSOLE</code>: show in console some debug messages about locker process.</li>
+				</ul>
+				<a href="#migration-files" id="migration-files" style="color: inherit; text-decoration: none;">
+					<h2>Migration Files</h2>
+				</a>
+				<p>All migration files need to use a specific pattern, starting with numbers and a <code>_</code>. My recommendation is to use date and <code>_</code> plus description. Examples:</p>
+				<pre><code class="language-txt">00_fixture.ts
+20200910_ChangingUserProfile.ts
+20200910_DefaultRBAC.ts</code></pre>
+				<a href="#template" id="template" style="color: inherit; text-decoration: none;">
+					<h3>Template</h3>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { MigrationParameters, LogLevel } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nsfilho/migration&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> up = <span class="hljs-keyword">async</span> ({ db, collections, log }: MigrationParameters): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; =&gt; {
+    <span class="hljs-comment">// sample 1: find a registry in a collection and forEach</span>
+    <span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> collections.migration.find();
+    content.forEach(<span class="hljs-function">(<span class="hljs-params">v</span>) =&gt;</span> {
+        log({ <span class="hljs-attr">message</span>: <span class="hljs-string">`Record: <span class="hljs-subst">${<span class="hljs-built_in">JSON</span>.stringify(v, <span class="hljs-literal">null</span>, <span class="hljs-number">4</span>)}</span>`</span>, <span class="hljs-attr">level</span>: LogLevel.normal });
+    });
+
+    <span class="hljs-comment">// sample 2: inserting a registry in a non-existing collection</span>
+    <span class="hljs-keyword">const</span> collectionSample1 = <span class="hljs-keyword">await</span> db.collection(<span class="hljs-string">&#x27;sample1&#x27;</span>);
+    collectionSample1.insertOne({
+        <span class="hljs-attr">field1</span>: <span class="hljs-string">&#x27;hello&#x27;</span>,
+        <span class="hljs-attr">field2</span>: <span class="hljs-string">&#x27;word&#x27;</span>,
+    });
+
+    <span class="hljs-comment">// sample 3: inserting in a existing collection</span>
+    <span class="hljs-keyword">await</span> collections.oldSample.insertOne({
+        <span class="hljs-attr">field1</span>: <span class="hljs-string">&#x27;yes&#x27;</span>,
+        <span class="hljs-attr">field2</span>: <span class="hljs-string">&#x27;I can&#x27;</span>,
+    });
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> down = <span class="hljs-keyword">async</span> ({ collections }: MigrationParameters): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; =&gt; {
+    <span class="hljs-comment">// a piece of code for down (not implemented yet!)</span>
+};</code></pre>
+				<a href="#resume-the-api" id="resume-the-api" style="color: inherit; text-decoration: none;">
+					<h3>Resume the API</h3>
+				</a>
+				<ul>
+					<li><strong>collections</strong>: a Javascript/Typescript object with collections as properties name.</li>
+					<li><strong>log</strong>: is a function that will log all records inside the <code>migration</code> collection, in a document what registry state executing file.</li>
+				</ul>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h2>Example</h2>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
+<span class="hljs-keyword">import</span> { lockResource } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nsfilho/redis-locker&#x27;</span>;
+<span class="hljs-keyword">import</span> { startMigration } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nsfilho/migration&#x27;</span>;
+
+<span class="hljs-comment">/** Locking a resource for all instances of this software */</span>
+lockResource({
+    <span class="hljs-attr">resourceName</span>: __filename,
+    <span class="hljs-attr">callback</span>: startMigration({
+        <span class="hljs-attr">migrationPath</span>: join(__dirname, <span class="hljs-string">&#x27;migrations&#x27;</span>),
+    }),
+});</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_constants_index_.html">&quot;constants/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_constants_migration_.html">&quot;constants/migration&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_constants_mongo_.html">&quot;constants/mongo&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_migration_index_.html">&quot;services/migration/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_migration_migration_.html">&quot;services/migration/migration&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_migration_mongo_.html">&quot;services/migration/mongo&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_migration_utils_.html">&quot;services/migration/utils&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
