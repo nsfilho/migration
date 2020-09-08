@@ -22,7 +22,7 @@
 module.exports = {
     mode: 'modules',
     out: 'docs',
-    name: 'redis-locker',
+    name: 'migration',
     inputFiles: ['./src'],
     exclude: '**/*.test.ts',
 };
