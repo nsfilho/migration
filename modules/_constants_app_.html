@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;index&quot; | migration</title>
+	<title>&quot;constants/app&quot; | migration</title>
 	<meta name="description" content="Documentation for migration">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_index_.html">&quot;index&quot;</a>
+					<a href="_constants_app_.html">&quot;constants/app&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;index&quot;</h1>
+			<h1>Module &quot;constants/app&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,32 +71,42 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>References</h3>
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#loglevel" class="tsd-kind-icon">Log<wbr>Level</a></li>
-								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#migrationparameters" class="tsd-kind-icon">Migration<wbr>Parameters</a></li>
-								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#startmigration" class="tsd-kind-icon">start<wbr>Migration</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_constants_app_.html#app_version" class="tsd-kind-icon">APP_<wbr>VERSION</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>References</h2>
-				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
-					<a name="loglevel" class="tsd-anchor"></a>
-					<h3>Log<wbr>Level</h3>
-					Re-exports <a href="_services_migration_migration_.html#loglevel">LogLevel</a>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
-					<a name="migrationparameters" class="tsd-anchor"></a>
-					<h3>Migration<wbr>Parameters</h3>
-					Re-exports <a href="../interfaces/_services_migration_migration_.migrationparameters.html">MigrationParameters</a>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
-					<a name="startmigration" class="tsd-anchor"></a>
-					<h3>start<wbr>Migration</h3>
-					Re-exports <a href="_services_migration_migration_.html#startmigration">startMigration</a>
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="app_version" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> APP_<wbr>VERSION</h3>
+					<div class="tsd-signature tsd-kind-icon">APP_<wbr>VERSION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.env.APP_VERSION || &#x27;1.0.0&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/492b8d4/src/constants/app.ts#L22">constants/app.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Migration Library
+							Copyright (C) 2020 E01-AIO Automação Ltda.</p>
+						</div>
+						<p>This program is free software: you can redistribute it and/or modify
+							it under the terms of the GNU General Public License as published by
+							the Free Software Foundation, either version 3 of the License, or
+						(at your option) any later version.</p>
+						<p>This program is distributed in the hope that it will be useful,
+							but WITHOUT ANY WARRANTY; without even the implied warranty of
+							MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+						GNU General Public License for more details.</p>
+						<p>You should have received a copy of the GNU General Public License
+						along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+						<p>Author: Nelio Santos <a href="mailto:&#x6e;&#x73;&#x66;&#105;&#x6c;&#x68;&#x6f;&#x40;&#105;&#x63;&#x6c;&#111;&#x75;&#100;&#x2e;&#x63;&#x6f;&#x6d;">&#x6e;&#x73;&#x66;&#105;&#x6c;&#x68;&#x6f;&#x40;&#105;&#x63;&#x6c;&#111;&#x75;&#100;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -106,7 +116,7 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="_constants_app_.html">&quot;constants/app&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -118,7 +128,7 @@
 					<li class=" tsd-kind-module">
 						<a href="_constants_mongo_.html">&quot;constants/mongo&quot;</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -137,14 +147,8 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="_index_.html#loglevel" class="tsd-kind-icon">Log<wbr>Level</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="_index_.html#migrationparameters" class="tsd-kind-icon">Migration<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="_index_.html#startmigration" class="tsd-kind-icon">start<wbr>Migration</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_constants_app_.html#app_version" class="tsd-kind-icon">APP_<wbr>VERSION</a>
 					</li>
 				</ul>
 			</nav>

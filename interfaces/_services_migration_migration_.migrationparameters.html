@@ -94,6 +94,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_services_migration_migration_.migrationparameters.html#collections" class="tsd-kind-icon">collections</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_services_migration_migration_.migrationparameters.html#db" class="tsd-kind-icon">db</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_services_migration_migration_.migrationparameters.html#log" class="tsd-kind-icon">log</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_services_migration_migration_.migrationparameters.html#refresh" class="tsd-kind-icon">refresh</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,9 +108,14 @@
 					<div class="tsd-signature tsd-kind-icon">collections<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Collection</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/6211102/src/services/migration/migration.ts#L37">services/migration/migration.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/492b8d4/src/services/migration/migration.ts#L40">services/migration/migration.ts:40</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>list of all collections indexed by name</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="db" class="tsd-anchor"></a>
@@ -117,9 +123,14 @@
 					<div class="tsd-signature tsd-kind-icon">db<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Db</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/6211102/src/services/migration/migration.ts#L36">services/migration/migration.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/492b8d4/src/services/migration/migration.ts#L38">services/migration/migration.ts:38</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Standard mongo object</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="log" class="tsd-anchor"></a>
@@ -127,9 +138,14 @@
 					<div class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="_services_migration_migration_.logrecord.html" class="tsd-signature-type">LogRecord</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/6211102/src/services/migration/migration.ts#L38">services/migration/migration.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/492b8d4/src/services/migration/migration.ts#L42">services/migration/migration.ts:42</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>logger helper</p>
+						</div>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -152,6 +168,36 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="refresh" class="tsd-anchor"></a>
+					<h3>refresh</h3>
+					<div class="tsd-signature tsd-kind-icon">refresh<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nsfilho/migration/blob/492b8d4/src/services/migration/migration.ts#L44">services/migration/migration.ts:44</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>refresh collection list</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -159,6 +205,9 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_constants_app_.html">&quot;constants/app&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_constants_index_.html">&quot;constants/index&quot;</a>
@@ -207,6 +256,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_services_migration_migration_.migrationparameters.html#log" class="tsd-kind-icon">log</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_services_migration_migration_.migrationparameters.html#refresh" class="tsd-kind-icon">refresh</a>
 							</li>
 						</ul>
 					</li>
