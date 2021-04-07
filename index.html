@@ -105,6 +105,9 @@
 				</a>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { MigrationParameters, LogLevel } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nsfilho/migration&#x27;</span>;
 
+<span class="hljs-comment">/** Used to show during logs and inform what about this migration is. */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> description = <span class="hljs-string">&#x27;Sample migration&#x27;</span>;
+
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> up = <span class="hljs-keyword">async</span> ({ db, collections, log, refresh }: MigrationParameters): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; =&gt; {
     <span class="hljs-comment">// sample 1: find a registry in a collection and forEach</span>
     <span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> collections.migration.find();
