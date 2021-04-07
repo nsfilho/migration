@@ -27,15 +27,21 @@ import { Db, Collection } from 'mongodb';
 import { MONGO_DATABASE, MIGRATION_COLLECTION_NAME, MIGRATION_DEBUG_CONSOLE } from '../../constants';
 import { databaseConnect, takeCollections } from './mongo';
 import { filteredFiles } from './utils';
+import { APP_VERSION } from '../../constants/app';
 
 /** Migration Unique ID */
 const migrationId = nanoid();
 
 /** Migration Parameters */
 export interface MigrationParameters {
+    /** Standard mongo object */
     db: Db;
+    /** list of all collections indexed by name */
     collections: Record<string, Collection>;
+    /** logger helper */
     log: (options: LogRecord) => void;
+    /** refresh collection list */
+    refresh: () => Promise<void>;
 }
 
 /** Named parameters interface */
@@ -98,6 +104,7 @@ interface markAsExecutedOptions {
 const markAsExecuted = async ({ db, filename, logs, failMessage }: markAsExecutedOptions): Promise<void> => {
     const collection = await db.collection(MIGRATION_COLLECTION_NAME);
     await collection.insertOne({
+        version: APP_VERSION,
         migrationId,
         filename,
         logs,
@@ -145,9 +152,12 @@ export const startMigration = async ({ migrationPath }: startMigrationOptions): 
 
                 try {
                     clog(`-> ${files[x]}: executing!`);
-                    const collections = await takeCollections({ db });
+                    let collections = await takeCollections({ db });
+                    const refresh = async (): Promise<void> => {
+                        collections = await takeCollections({ db });
+                    };
                     const myMigration = await import(join(migrationPath, files[x]));
-                    if (typeof myMigration.up === 'function') await myMigration.up({ db, collections, log });
+                    if (typeof myMigration.up === 'function') await myMigration.up({ db, collections, log, refresh });
                     await markAsExecuted({ filename: files[x], db, logs });
                     clog(`-> ${files[x]}: done!`);
                 } catch (err) {

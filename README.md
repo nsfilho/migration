@@ -7,6 +7,12 @@ others routines. A fully updated microservice version.
 -   Site Documentation: [Homepage](https://nsfilho.github.io/migration/index.html)
 -   Repository: [GitHub](https://github.com/nsfilho/migration.git)
 
+## TODO List
+
+1. Add a new collection to check via semver if APP_VERSION is newer or older;
+2. Create the `down` systems;
+3. Implement migrations for Sequelize ORM;
+
 ## Environment Variables
 
 This services use some environment variables to pre-adjust some things, like:
@@ -15,6 +21,7 @@ This services use some environment variables to pre-adjust some things, like:
 -   `MONGO_DATABASE`: a database name (usually, same as in `MONGO_URL`). Default: platform.
 -   `MIGRATION_COLLECTION_NAME`: the collection name to maintain documents about stages and results. Default: migration.
 -   `MIGRATION_DEBUG_CONSOLE`: show in console some debug messages about locker process.
+-   `APP_VERSION`: use this to inform the software version (usually it is a docker environment variable). Default: `1.0.0`.
 
 ## Migration Files
 
@@ -31,7 +38,7 @@ All migration files need to use a specific pattern, starting with numbers and a 
 ```javascript
 import { MigrationParameters, LogLevel } from '@nsfilho/migration';
 
-export const up = async ({ db, collections, log }: MigrationParameters): Promise<void> => {
+export const up = async ({ db, collections, log, refresh }: MigrationParameters): Promise<void> => {
     // sample 1: find a registry in a collection and forEach
     const content = await collections.migration.find();
     content.forEach((v) => {
@@ -45,8 +52,11 @@ export const up = async ({ db, collections, log }: MigrationParameters): Promise
         field2: 'word',
     });
 
+    // Re-create the collections object.
+    await refresh();
+
     // sample 3: inserting in a existing collection
-    await collections.oldSample.insertOne({
+    await collections.oldSample1.insertOne({
         field1: 'yes',
         field2: 'I can',
     });

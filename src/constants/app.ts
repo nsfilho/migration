@@ -19,6 +19,4 @@
  * 
  */
 
-export * from './mongo';
-export * from './migration';
-export * from './app';
+export const APP_VERSION = process.env.APP_VERSION || '1.0.0';
