@@ -38,6 +38,9 @@ All migration files need to use a specific pattern, starting with numbers and a 
 ```javascript
 import { MigrationParameters, LogLevel } from '@nsfilho/migration';
 
+/** Used to show during logs and inform what about this migration is. */
+export const description = 'Sample migration';
+
 export const up = async ({ db, collections, log, refresh }: MigrationParameters): Promise<void> => {
     // sample 1: find a registry in a collection and forEach
     const content = await collections.migration.find();

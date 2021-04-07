@@ -95,19 +95,28 @@ interface markAsExecutedOptions {
     logs: LogEvent[];
     /** if an error is reported in a try/catch */
     failMessage?: string;
+    /** description */
+    description: string | null;
 }
 
 /**
  * Mark a migration file was processed
  * @param options named params
  */
-const markAsExecuted = async ({ db, filename, logs, failMessage }: markAsExecutedOptions): Promise<void> => {
+const markAsExecuted = async ({
+    db,
+    filename,
+    logs,
+    failMessage,
+    description,
+}: markAsExecutedOptions): Promise<void> => {
     const collection = await db.collection(MIGRATION_COLLECTION_NAME);
     await collection.insertOne({
         version: APP_VERSION,
         migrationId,
         filename,
         logs,
+        description,
         executed: {
             status: !failMessage,
             when: dayjs().toISOString(),
@@ -146,10 +155,11 @@ export const startMigration = async ({ migrationPath }: startMigrationOptions): 
                 clog(`-> ${files[x]}: was processed!`);
             } else {
                 const logs: LogEvent[] = [];
+                let description: string | null = null;
+
                 const log = ({ level, message }: LogRecord) => {
                     logs.push({ level, message, when: dayjs().toISOString() });
                 };
-
                 try {
                     clog(`-> ${files[x]}: executing!`);
                     let collections = await takeCollections({ db });
@@ -157,11 +167,21 @@ export const startMigration = async ({ migrationPath }: startMigrationOptions): 
                         collections = await takeCollections({ db });
                     };
                     const myMigration = await import(join(migrationPath, files[x]));
+                    if (typeof myMigration.description === 'string') {
+                        description = myMigration.description;
+                        clog(`   ${description}`);
+                    }
                     if (typeof myMigration.up === 'function') await myMigration.up({ db, collections, log, refresh });
-                    await markAsExecuted({ filename: files[x], db, logs });
+                    await markAsExecuted({ filename: files[x], db, logs, description });
                     clog(`-> ${files[x]}: done!`);
                 } catch (err) {
-                    await markAsExecuted({ filename: files[x], db, failMessage: err.toString(), logs });
+                    await markAsExecuted({
+                        filename: files[x],
+                        db,
+                        failMessage: err.toString(),
+                        logs,
+                        description,
+                    });
                     cerror(`-> ${files[x]}: fail!`);
                 }
             }
