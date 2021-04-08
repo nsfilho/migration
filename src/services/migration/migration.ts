@@ -162,9 +162,10 @@ export const startMigration = async ({ migrationPath }: startMigrationOptions): 
                 };
                 try {
                     clog(`-> ${files[x]}: executing!`);
-                    let collections = await takeCollections({ db });
+                    const collections = await takeCollections({ db });
                     const refresh = async (): Promise<void> => {
-                        collections = await takeCollections({ db });
+                        const newContent = await takeCollections({ db });
+                        Object.assign(collections, newContent);
                     };
                     const myMigration = await import(join(migrationPath, files[x]));
                     if (typeof myMigration.description === 'string') {
