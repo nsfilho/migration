@@ -30,4 +30,8 @@ interface filteredFilesOptions {
  * Filter all files in migration directory was respect the name syntax.
  */
 export const filteredFiles = async ({ migrationPath }: filteredFilesOptions): Promise<string[]> =>
-    (await readdir(migrationPath)).sort().filter((file) => /[0-9]+.*\.ts$/.test(file));
+    (await readdir(migrationPath))
+        .sort()
+        .filter((file) => !file.endsWith('.d.ts'))
+        .filter((file) => !file.endsWith('.js.map'))
+        .filter((file) => /[0-9]+.*\.(ts|js)$/.test(file));
