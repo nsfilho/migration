@@ -58,7 +58,7 @@ interface isExecutedOptions {
  */
 const isExecuted = async ({ db, filename }: isExecutedOptions): Promise<boolean> => {
     const collection = await db.collection(MIGRATION_COLLECTION_NAME);
-    const record = await collection.findOne({ filename, 'executed.status': true });
+    const record = await collection.findOne({ $or: [{ filename }, { file: filename }], 'executed.status': true });
     return record !== null;
 };
 
