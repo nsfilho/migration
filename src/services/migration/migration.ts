@@ -57,9 +57,15 @@ interface isExecutedOptions {
  * @param options named params
  */
 const isExecuted = async ({ db, filename }: isExecutedOptions): Promise<boolean> => {
+    const withoutExt = filename.replace(/.[tj]s$/, '');
+    const inNames = [`${withoutExt}.js`, `${withoutExt}.ts`];
     const collection = await db.collection(MIGRATION_COLLECTION_NAME);
-    const record = await collection.findOne({ $or: [{ filename }, { file: filename }], 'executed.status': true });
+    const record = await collection.findOne({
+        $or: [{ filename: { $in: inNames } }, { file: { $in: inNames } }],
+        'executed.status': true,
+    });
     return record !== null;
+    // so um minuto :))
 };
 
 /** Predefined LogLevel */
