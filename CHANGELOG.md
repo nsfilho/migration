@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.17](https://github.com/nsfilho/migration/compare/v0.1.16...v0.1.17) (2024-03-16)
+
+
+### Bug Fixes
+
+* docs ([6f08bb0](https://github.com/nsfilho/migration/commit/6f08bb0f0306ede6eea611f52e68aaa47aa0061a))
+
 ### [0.1.16](https://github.com/nsfilho/migration/compare/v0.1.15...v0.1.16) (2024-03-16)
 
 
