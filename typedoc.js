@@ -20,9 +20,7 @@
  */
 
 module.exports = {
-    mode: 'modules',
     out: 'docs',
     name: 'migration',
-    inputFiles: ['./src'],
     exclude: '**/*.test.ts',
 };
