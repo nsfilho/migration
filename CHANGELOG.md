@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://github.com/nsfilho/migration/compare/v0.1.14...v0.1.15) (2024-03-16)
+
+
+### Features
+
+* upgrading libs ([dac280e](https://github.com/nsfilho/migration/commit/dac280e383d0a38f03ff17002624fab7b01b580b))
+
 ### [0.1.7](https://github.com/nsfilho/migration/compare/v0.1.6...v0.1.7) (2020-09-09)
 
 ### [0.1.6](https://github.com/nsfilho/migration/compare/v0.1.5...v0.1.6) (2020-09-08)
