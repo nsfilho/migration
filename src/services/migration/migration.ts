@@ -32,6 +32,14 @@ import { APP_VERSION } from '../../constants/app';
 /** Migration Unique ID */
 const migrationId = nanoid();
 
+/** Named parameters interface */
+interface LogRecord {
+    /** Information log */
+    message: string;
+    /** Log Level */
+    level: string;
+}
+
 /** Migration Parameters */
 export interface MigrationParameters {
     /** Standard mongo object */
@@ -59,7 +67,7 @@ interface isExecutedOptions {
 const isExecuted = async ({ db, filename }: isExecutedOptions): Promise<boolean> => {
     const withoutExt = filename.replace(/.[tj]s$/, '');
     const inNames = [`${withoutExt}.js`, `${withoutExt}.ts`];
-    const collection = await db.collection(MIGRATION_COLLECTION_NAME);
+    const collection = db.collection(MIGRATION_COLLECTION_NAME);
     const record = await collection.findOne({
         $or: [{ filename: { $in: inNames } }, { file: { $in: inNames } }],
         'executed.status': true,
@@ -76,14 +84,6 @@ export const LogLevel = {
     warn: 'warn',
     error: 'error',
 };
-
-/** Named parameters interface */
-interface LogRecord {
-    /** Information log */
-    message: string;
-    /** Log Level */
-    level: string;
-}
 
 /** Log Event Interface */
 interface LogEvent extends LogRecord {
@@ -116,7 +116,7 @@ const markAsExecuted = async ({
     failMessage,
     description,
 }: markAsExecutedOptions): Promise<void> => {
-    const collection = await db.collection(MIGRATION_COLLECTION_NAME);
+    const collection = db.collection(MIGRATION_COLLECTION_NAME);
     await collection.insertOne({
         version: APP_VERSION,
         migrationId,
