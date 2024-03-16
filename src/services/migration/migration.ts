@@ -185,7 +185,7 @@ export const startMigration = async ({ migrationPath }: startMigrationOptions): 
                     await markAsExecuted({
                         filename: files[x],
                         db,
-                        failMessage: err.toString(),
+                        failMessage: `${err}`,
                         logs,
                         description,
                     });

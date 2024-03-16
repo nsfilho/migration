@@ -26,10 +26,7 @@ import { MONGO_URL } from '../../constants';
  * Connect to mongo database
  */
 export const databaseConnect = async (): Promise<MongoClient> => {
-    const client = new MongoClient(MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+    const client = new MongoClient(MONGO_URL);
     return client.connect();
 };
 
